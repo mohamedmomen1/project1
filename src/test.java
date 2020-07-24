@@ -190,6 +190,11 @@ public class test {
     }
 
     private static void attendMeeting(Person user) {
+        if (allMeeting.size() == 0) {
+            System.out.println("you meeting list is empty");
+            return;
+        }
+
         Scanner input = new Scanner(System.in);
         System.out.println("Meetings available : ");
         for (Meeting meeting : allMeeting) {
@@ -220,6 +225,11 @@ public class test {
     }
 
     private static void leaveMeeting(Person user) {
+        if (user.getMyMeeting().size() == 0) {
+            System.out.println("you meeting list is empty");
+            return;
+        }
+
         System.out.println("These are the meetings that you are attending:\n");
         user.displayMyMeetings();
         Scanner input = new Scanner(System.in);
