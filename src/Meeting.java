@@ -10,7 +10,7 @@ public class Meeting {
     public Meeting(String name, Date date, Person host, ArrayList<Person> attendees) {
         this.name = name;
         this.meetingDate = date;
-        this.attendees = attendees; // TODO shouldn't you check if it is not empty?
+        this.attendees = attendees;
 
         this.host = host;
         this.attendees.add(host);
@@ -56,6 +56,12 @@ public class Meeting {
     }
 
     public boolean removeAttendee(Person m2) {
+        // TODO what if he was the host?
+        if (m2 == host) {
+            System.out.println("can't remove host");
+            return false;
+        }
+
         boolean exist = false;
         for (Person attendee : attendees) {
             if (attendee.equals(m2)) {
@@ -65,7 +71,7 @@ public class Meeting {
         }
         if (exist) {
             attendees.remove(m2);
-            m2.removeMeeting(this); // TODO what if he was the host?
+            m2.removeMeeting(this);
             return true;
         }
 
