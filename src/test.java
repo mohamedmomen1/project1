@@ -60,7 +60,7 @@ public class test {
 
                     case 5:
                         if(currentUser.getMyMeeting().size() == 0){
-                            System.out.println("your meeting is empty");
+                            System.out.println("Your meeting list is empty");
                         }else {
                             System.out.println("List of meetings attended by " + currentUser.getName() + ":\n");
                             currentUser.displayMyMeetings();
