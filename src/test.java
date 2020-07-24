@@ -60,7 +60,7 @@ public class test {
 
                     case 5:
                         if(currentUser.getMyMeeting().size() == 0){
-                            System.out.println("your meeting is empty");
+                            System.out.println("Your meeting list is empty");
                         }else {
                             System.out.println("List of meetings attended by " + currentUser.getName() + " : ");
                             currentUser.displayMyMeetings();
@@ -192,25 +192,29 @@ public class test {
     private static void attendMeeting(Person user) {
         Scanner input = new Scanner(System.in);
         System.out.println("Meetings available : ");
-        for (int i = 0; i < allMeeting.size(); i++) {
-            System.out.println("Meeting's name : " + allMeeting.get(i).getName()
-                    + " at " + allMeeting.get(i).getMeetingDate());
-
-        }
-        System.out.println("would you like to attend any one of them ? (y/n)");
-        char yesNo = input.next().charAt(0);
-        if (yesNo == 'y') {
-            System.out.println("Enter the name of the meeting you wish to attend : ");
-            String meetingToAttend = input.next();
-            int index = -1;
+        if (allMeeting.size() == 0) {
+            System.out.println("you meeting list is empty");
+        } else {
             for (int i = 0; i < allMeeting.size(); i++) {
-                if (allMeeting.get(i).getName().equals(meetingToAttend)) {
-                    index = i;
-                    break;
-                }
+                System.out.println("Meeting's name : " + allMeeting.get(i).getName()
+                        + " at " + allMeeting.get(i).getMeetingDate());
+
             }
-            allMeeting.get(index).addAttendee(user);
-            System.out.println("ok, the meeting has been added to your agenda");
+            System.out.println("would you like to attend any one of them ? (y/n)");
+            char yesNo = input.next().charAt(0);
+            if (yesNo == 'y') {
+                System.out.println("Enter the name of the meeting you wish to attend : ");
+                String meetingToAttend = input.next();
+                int index = -1;
+                for (int i = 0; i < allMeeting.size(); i++) {
+                    if (allMeeting.get(i).getName().equals(meetingToAttend)) {
+                        index = i;
+                        break;
+                    }
+                }
+                allMeeting.get(index).addAttendee(user);
+                System.out.println("ok, the meeting has been added to your agenda");
+            }
         }
     }
 
