@@ -9,11 +9,10 @@ public class test {
     static Scanner m = new Scanner(System.in);
     static Person currentUser = new Person("");
 
-
     public static void main(String[] args) {
         String o;
         int choice = -1;
-        boolean pcontinue = true;
+
         while (true) {
             System.out.println("enter username: ");
             o = m.next();
@@ -60,18 +59,18 @@ public class test {
                         break;
 
                     case 5:
-                        if (currentUser.getMyMeeting().size() == 0) {
+                        if(currentUser.getMyMeeting().size() == 0){
                             System.out.println("your meeting is empty");
-                        } else {
+                        }else {
                             System.out.println("List of meetings attended by " + currentUser.getName() + " : ");
                             currentUser.displayMyMeetings();
                         }
                         break;
 
                     case 6:
-                        if (currentUser.getiOrganized().size() == 0) {
+                        if (currentUser.getiOrganized().size() == 0){
                             System.out.println("You haven't organized any meeting yet!");
-                        } else {
+                        }else {
                             System.out.println("List of meetings organized by " + currentUser.getName() + " : ");
                             currentUser.displayMyOrgnizations();
                         }
@@ -81,7 +80,8 @@ public class test {
                         logIn = false;
                         break;
                     case 8:
-                        System.out.println("See You Later!");
+                        System.out.println("bye!");
+                        System.exit(0);
                         break;
 
                     default:
@@ -116,7 +116,7 @@ public class test {
                             currentUser = alluser.get(index);
                             logIn = true;
                             break;
-                        } else {
+                        }else {
                             System.out.println(" no such user exist");
                         }
                         break;
@@ -239,5 +239,3 @@ public class test {
         user.removeMeeting(user.getMyMeeting().get(index));
     }
 }
-
-

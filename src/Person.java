@@ -15,7 +15,6 @@ public class Person {
 
         myMeeting = new ArrayList<>();
         iOrganized = new ArrayList<>();
-
         count++;
     }
 
