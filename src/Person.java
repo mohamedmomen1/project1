@@ -49,17 +49,21 @@ public class Person {
 
     // TODO this doesn't work
     public boolean addMeeting(Meeting mAdd) {
+        boolean y = false;
         for (int i = 0; i < myMeeting.size(); i++) {
             if (myMeeting.get(i).equaldate(mAdd)) {
-                return false;
-            } else {
-                myMeeting.add(mAdd);
-                return true;
+                y = true;
+                break;
             }
-
+        }
+        if (y) {
+            mAdd.addAttendee(this);  // TODO this doesn't make sense. Why add him if he already exists?
+        } else {
+            myMeeting.add(mAdd);
         }
         return false;
     }
+
 
     // TODO can be simplified
     public void removeMeeting(Meeting mRemove) {
@@ -79,10 +83,11 @@ public class Person {
     }
 
     // TODO this has wrong behaviour. I can only cancel a meeting which is mine (i.e. in iOrganized list)
+    // done
     public void cancelMeeting(Meeting o) {
         int index = -1;
-        for (int i = 0; i < myMeeting.size(); i++) {
-            if (myMeeting.get(i).equals(o)) {
+        for (int i = 0; i < iOrganized.size(); i++) {
+            if (iOrganized.get(i).equals(o)) {
                 index = i;
                 break;
             }
@@ -91,7 +96,7 @@ public class Person {
 
         // TODO removing meeting from attendees is wrong. You remove using removeMeeting, not index
         for (int i = 0; i < o.getAttendees().size(); i++) {
-            o.getAttendees().get(i).myMeeting.remove(index);
+            o.getAttendees().get(i).iOrganized.remove(index);
         }
     }
 
