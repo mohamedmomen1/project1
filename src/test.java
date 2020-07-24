@@ -224,13 +224,18 @@ public class test {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the name of the meeting you wish to leave : ");
         String meetingToLeave = input.next();
-        int index = -1;
-        for (int i = 0; i < user.getMyMeeting().size(); i++) {
-            if (user.getMyMeeting().get(i).getName().equals(meetingToLeave)) {
-                index = i;
-                break;
+        if (user.getMyMeeting().size() == 0) {
+            System.out.println("you meeting list is empty");
+
+        } else {
+            int index = -1;
+            for (int i = 0; i < user.getMyMeeting().size(); i++) {
+                if (user.getMyMeeting().get(i).getName().equals(meetingToLeave)) {
+                    index = i;
+                    break;
+                }
             }
+            user.removeMeeting(user.getMyMeeting().get(index));
         }
-        user.removeMeeting(user.getMyMeeting().get(index));
     }
 }
