@@ -47,29 +47,31 @@ public class Person {
         return this.name.equals(person.name) && this.id == person.id;
     }
 
-    // TODO this doesn't work
+    // TODO check
     public boolean addMeeting(Meeting mAdd) {
-        for (int i = 0; i < myMeeting.size(); i++) {
-            if (myMeeting.get(i).equaldate(mAdd)) {
-                return false;
-            } else {
-                myMeeting.add(mAdd);
-                return true;
+        boolean add = true;
+        for (Meeting meeting : myMeeting) {
+            if (meeting.equaldate(mAdd)) {
+                add = false;
             }
-
         }
-        return false;
+
+        if (add) {
+            myMeeting.add(mAdd);
+        }
+
+        return add;
     }
 
-    // TODO can be simplified
+    // TODO check
+    // it had a problem because of index = -1
     public void removeMeeting(Meeting mRemove) {
-        int index = -1;
-        for (int i = 0; i < myMeeting.size(); i++)
+        for (int i = 0; i < myMeeting.size(); i++) {
             if (myMeeting.get(i).equals(mRemove)) {
-                index = i;
+                myMeeting.remove(i);
                 break;
             }
-        myMeeting.remove(index);
+        }
     }
 
     // TODO what if it is already added?
@@ -78,20 +80,24 @@ public class Person {
         iOrganized.add(r);
     }
 
-    // TODO this has wrong behaviour. I can only cancel a meeting which is mine (i.e. in iOrganized list)
-    public void cancelMeeting(Meeting o) {
+    // TODO check
+    public void cancelMeeting(Meeting meeting) {
         int index = -1;
-        for (int i = 0; i < myMeeting.size(); i++) {
-            if (myMeeting.get(i).equals(o)) {
+        for (int i = 0; i < iOrganized.size(); i++) {
+            if (iOrganized.get(i).equals(meeting)) {
                 index = i;
                 break;
             }
         }
-        iOrganized.remove(index);
 
-        // TODO removing meeting from attendees is wrong. You remove using removeMeeting, not index
-        for (int i = 0; i < o.getAttendees().size(); i++) {
-            o.getAttendees().get(i).myMeeting.remove(index);
+        if (index == -1) {
+            System.out.println("meeting not found");
+        }else{
+            iOrganized.remove(index);
+
+            for (Person attendee : meeting.getAttendees()) {
+                attendee.removeMeeting(meeting);
+            }
         }
     }
 

@@ -170,24 +170,6 @@ public class test {
         String cancelMe = input.next();
         int index = -1;
         // TODO this is wrong. You display iOrganize of a host, not all meetings
-        for (int i = 0; i < allMeeting.size(); i++) {
-            if (allMeeting.get(i).getName().equals(cancelMe)) {
-                index = i;
-                break;
-            }
-        }
-
-        // TODO what if he entered a wrong name?
-        // fix by abe
-        if (index == -1) {
-            System.out.println("you entered a wrong name");
-            return;
-        }
-
-        System.out.println("All attendees of " + allMeeting.get(index).getName() + " have been removed. " + allMeeting.get(index).getName() + " is cancelled.");
-        allMeeting.remove(index);
-
-        // TODO this is stupid. This is not needed because if we pass meeting object to cancelMeeting then it will do the search
         for (int i = 0; i < host.getiOrganized().size(); i++) {
             if (host.getiOrganized().get(i).getName().equals(cancelMe)) {
                 index = i;
@@ -195,7 +177,16 @@ public class test {
             }
         }
 
-        host.cancelMeeting(host.getiOrganized().get(index));
+        if (index == -1) {
+            System.out.println("you entered a wrong name");
+            return;
+        }
+
+        Meeting cancelMeeting = host.getiOrganized().get(index);
+
+        System.out.println("All attendees of " + cancelMeeting.getName() + " have been removed. " + cancelMeeting.getName() + " is cancelled.");
+        host.cancelMeeting(cancelMeeting); // cancel meeting removes
+        allMeeting.remove(index);
     }
 
     private static void attendMeeting(Person user) {
