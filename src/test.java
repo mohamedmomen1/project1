@@ -190,11 +190,12 @@ public class test {
     }
 
     private static void attendMeeting(Person user) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Meetings available : ");
         if (allMeeting.size() == 0) {
             System.out.println("you meeting list is empty");
-        } else {
+            return;
+        }
+        Scanner input = new Scanner(System.in);
+        System.out.println("Meetings available : ");
             for (int i = 0; i < allMeeting.size(); i++) {
                 System.out.println("Meeting's name : " + allMeeting.get(i).getName()
                         + " at " + allMeeting.get(i).getMeetingDate());
@@ -216,18 +217,18 @@ public class test {
                 System.out.println("ok, the meeting has been added to your agenda");
             }
         }
-    }
 
     private static void leaveMeeting(Person user) {
+        if (user.getMyMeeting().size() == 0) {
+            System.out.println("you meeting list is empty");
+            return;
+
+        }
         System.out.println("These are the meetings that you are attending : ");
         user.displayMyMeetings();
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the name of the meeting you wish to leave : ");
         String meetingToLeave = input.next();
-        if (user.getMyMeeting().size() == 0) {
-            System.out.println("you meeting list is empty");
-
-        } else {
             int index = -1;
             for (int i = 0; i < user.getMyMeeting().size(); i++) {
                 if (user.getMyMeeting().get(i).getName().equals(meetingToLeave)) {
@@ -238,4 +239,3 @@ public class test {
             user.removeMeeting(user.getMyMeeting().get(index));
         }
     }
-}
