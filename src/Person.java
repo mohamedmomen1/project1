@@ -47,7 +47,7 @@ public class Person {
         return this.name.equals(person.name) && this.id == person.id;
     }
 
-    // TODO check
+    // TODO this doesn't work. Check
     public boolean addMeeting(Meeting mAdd) {
         boolean add = true;
         for (Meeting meeting : myMeeting) {
@@ -58,13 +58,13 @@ public class Person {
 
         if (add) {
             myMeeting.add(mAdd);
+            mAdd.addAttendee(this); // TODO this is not written in the requirements
         }
 
         return add;
     }
 
-    // TODO check
-    // it had a problem because of index = -1
+    // TODO can be simplified. Check
     public void removeMeeting(Meeting mRemove) {
         for (int i = 0; i < myMeeting.size(); i++) {
             if (myMeeting.get(i).equals(mRemove)) {
@@ -80,7 +80,7 @@ public class Person {
         iOrganized.add(r);
     }
 
-    // TODO check
+    // TODO this has wrong behaviour. I can only cancel a meeting which is mine (i.e. in iOrganized list). Check
     public void cancelMeeting(Meeting meeting) {
         int index = -1;
         for (int i = 0; i < iOrganized.size(); i++) {

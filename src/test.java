@@ -169,7 +169,7 @@ public class test {
         System.out.println("Enter the name of the meeting you wish to cancel : ");
         String cancelMe = input.next();
         int index = -1;
-        // TODO this is wrong. You display iOrganize of a host, not all meetings
+        // TODO this is wrong. You display iOrganize of a host, not all meetings. Check
         for (int i = 0; i < host.getiOrganized().size(); i++) {
             if (host.getiOrganized().get(i).getName().equals(cancelMe)) {
                 index = i;
