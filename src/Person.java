@@ -58,7 +58,9 @@ public class Person {
 
         if (add) {
             myMeeting.add(mAdd);
-            mAdd.addAttendee(this); // TODO this is not written in the requirements
+            // When a person is added to a meeting we update the meeting side
+            // directly from the meeting class in order to avoid a recursion
+            // between addMeeting and addAttendee.
         }
 
         return add;

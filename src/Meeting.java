@@ -48,9 +48,11 @@ public class Meeting {
                 break;
             }
         }
-        if (exist) {
-            attendees.add(m1); // TODO this doesn't make sense. Why add him if he already exists?
-        } else {
+
+        // Only add the attendee if he is not already in the list
+        if (!exist) {
+            attendees.add(m1);
+            // update the attendee meetings without creating a recursion
             m1.addMeeting(this);
         }
     }
